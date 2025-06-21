@@ -160,86 +160,90 @@ function Admin() {
 
                 {/* Tabel di bawah filter */}
                 {tab === "pelaporans" && !loading && (
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Judul</th>
-                                <th>Jenis</th>
-                                <th>Laporan</th>
-                                <th>Tanggal Kejadian</th>
-                                <th>Provinsi</th>
-                                <th>Kabupaten</th>
-                                <th>Kecamatan</th>
-                                <th>Tujuan</th>
-                                <th>Kategori</th>
-                                <th>Status</th>
-                                <th>Tanggal Input</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredPelaporans.map((p) => (
-                                <tr key={p._id}>
-                                    <td>{p.judul}</td>
-                                    <td>{p.jenis}</td>
-                                    <td>{p.laporan}</td>
-                                    <td>{new Date(p.tanggal_kejadian).toLocaleDateString()}</td>
-                                    <td>{getNamaProvinsi(p.provinsi)}</td>
-                                    <td>{getNamaKabupaten(p.provinsi, p.kabupaten)}</td>
-                                    <td>{p.kecamatan}</td>
-                                    <td>{p.tujuan}</td>
-                                    <td>{p.kategori}</td>
-                                    <td>{p.status}</td>
-                                    <td>{p.createdAt ? new Date(p.createdAt).toLocaleString() : ""}</td>
-                                    <td>
-                                        <button onClick={() => openModal(p._id, p.status)}>
-                                            Update Status
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                            {filteredPelaporans.length === 0 && (
+                    <div className="table-responsive">
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td colSpan={12}>Tidak ada data</td>
+                                    <th>Judul</th>
+                                    <th>Jenis</th>
+                                    <th>Laporan</th>
+                                    <th>Tanggal Kejadian</th>
+                                    <th>Provinsi</th>
+                                    <th>Kabupaten</th>
+                                    <th>Kecamatan</th>
+                                    <th>Tujuan</th>
+                                    <th>Kategori</th>
+                                    <th>Status</th>
+                                    <th>Tanggal Input</th>
+                                    <th>Aksi</th>
                                 </tr>
-                            )}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {filteredPelaporans.map((p) => (
+                                    <tr key={p._id}>
+                                        <td>{p.judul}</td>
+                                        <td>{p.jenis}</td>
+                                        <td>{p.laporan}</td>
+                                        <td>{new Date(p.tanggal_kejadian).toLocaleDateString()}</td>
+                                        <td>{getNamaProvinsi(p.provinsi)}</td>
+                                        <td>{getNamaKabupaten(p.provinsi, p.kabupaten)}</td>
+                                        <td>{p.kecamatan}</td>
+                                        <td>{p.tujuan}</td>
+                                        <td>{p.kategori}</td>
+                                        <td>{p.status}</td>
+                                        <td>{p.createdAt ? new Date(p.createdAt).toLocaleString() : ""}</td>
+                                        <td>
+                                            <button onClick={() => openModal(p._id, p.status)}>
+                                                Update Status
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                                {filteredPelaporans.length === 0 && (
+                                    <tr>
+                                        <td colSpan={12}>Tidak ada data</td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
                 )}
 
                 {tab === "users" && !loading && (
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Email</th>
-                                <th>UID</th>
-                                <th>Created At</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredUsers.map((u) => (
-                                <tr key={u._id}>
-                                    <td>{u.email}</td>
-                                    <td>{u.uid}</td>
-                                    <td>{new Date(u.createdAt).toLocaleString()}</td>
-                                    <td>
-                                        <button
-                                            style={{ background: "#e53935", color: "#fff", border: "none", borderRadius: "4px", padding: "6px 12px", cursor: "pointer" }}
-                                            onClick={() => handleDeleteUser(u._id)}
-                                        >
-                                            Hapus
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                            {filteredUsers.length === 0 && (
+                    <div className="table-responsive">
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td colSpan={4}>Tidak ada data</td>
+                                    <th>Email</th>
+                                    <th>UID</th>
+                                    <th>Created At</th>
+                                    <th>Aksi</th>
                                 </tr>
-                            )}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {filteredUsers.map((u) => (
+                                    <tr key={u._id}>
+                                        <td>{u.email}</td>
+                                        <td>{u.uid}</td>
+                                        <td>{new Date(u.createdAt).toLocaleString()}</td>
+                                        <td>
+                                            <button
+                                                style={{ background: "#e53935", color: "#fff", border: "none", borderRadius: "4px", padding: "6px 12px", cursor: "pointer" }}
+                                                onClick={() => handleDeleteUser(u._id)}
+                                            >
+                                                Hapus
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                                {filteredUsers.length === 0 && (
+                                    <tr>
+                                        <td colSpan={4}>Tidak ada data</td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
                 )}
 
                 {/* Modal Update Status */}

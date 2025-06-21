@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./admin.scss";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
-
+const API_URL_FIREBASE = process.env.REACT_APP_API_URL_FIREBASE || "http://localhost:5000";
 function Admin() {
     const [tab, setTab] = useState("pelaporans");
     const [pelaporans, setPelaporans] = useState([]);
@@ -38,7 +38,7 @@ function Admin() {
     const fetchUsers = async () => {
         setLoading(true);
         try {
-            const res = await fetch(`${API_URL}/api/user`);
+            const res = await fetch(`${API_URL_FIREBASE}/api/admin/firebase-users`);
             const data = await res.json();
             setUsers(data);
         } catch {
@@ -210,41 +210,51 @@ function Admin() {
                 )}
 
                 {tab === "users" && !loading && (
-                    <div className="table-responsive">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Email</th>
-                                    <th>UID</th>
-                                    <th>Created At</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {filteredUsers.map((u) => (
-                                    <tr key={u._id}>
-                                        <td>{u.email}</td>
-                                        <td>{u.uid}</td>
-                                        <td>{new Date(u.createdAt).toLocaleString()}</td>
-                                        <td>
-                                            <button
-                                                style={{ background: "#e53935", color: "#fff", border: "none", borderRadius: "4px", padding: "6px 12px", cursor: "pointer" }}
-                                                onClick={() => handleDeleteUser(u._id)}
-                                            >
-                                                Hapus
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                                {filteredUsers.length === 0 && (
-                                    <tr>
-                                        <td colSpan={4}>Tidak ada data</td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
-                    </div>
-                )}
+  <div className="table-responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>UID</th>
+          <th>Created At</th>
+          <th>Last Sign In</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {filteredUsers.map((u) => (
+          <tr key={u.uid}>
+            <td>{u.email}</td>
+            <td>{u.uid}</td>
+            <td>{u.createdAt ? new Date(u.createdAt).toLocaleString() : "-"}</td>
+            <td>{u.lastSignIn ? new Date(u.lastSignIn).toLocaleString() : "-"}</td>
+            <td>
+              <button
+                style={{
+                  background: "#e53935",
+                  color: "#fff",
+                  border: "none",
+                  borderRadius: "4px",
+                  padding: "6px 12px",
+                  cursor: "pointer"
+                }}
+                onClick={() => alert("UID tidak bisa dihapus langsung dari sini.")}
+              >
+                Hapus
+              </button>
+            </td>
+          </tr>
+        ))}
+        {filteredUsers.length === 0 && (
+          <tr>
+            <td colSpan={5}>Tidak ada data</td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+)}
+
 
                 {/* Modal Update Status */}
                 {showModal && (

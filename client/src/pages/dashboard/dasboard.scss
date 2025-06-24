@@ -5,21 +5,15 @@
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
-    /* Animated blue-grey gradient background */
     background: linear-gradient(-45deg, #2563eb 0%, #eaf1fb 40%, #f4f6fa 70%, #bfc9d9 100%);
     background-size: 300% 300%;
     animation: dashboardGradientMove 18s ease-in-out infinite;
 }
+
 @keyframes dashboardGradientMove {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .dashboard-bg-poly {
@@ -27,16 +21,11 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    z-index: 0; // pastikan lebih rendah dari konten
+    z-index: 0;
     pointer-events: none;
     user-select: none;
     opacity: 1;
     animation: fadeInPoly 1.2s;
-}
-.dashboard-bg-poly-svg {
-    width: 100%;
-    height: 100%;
-    display: block;
 }
 
 @keyframes fadeInPoly {
@@ -44,7 +33,19 @@
     to { opacity: 1; }
 }
 
-/* Pastikan konten dashboard di atas background */
+.skeleton {
+    background: linear-gradient(90deg, #d1d5db 25%, #e5e7eb 50%, #d1d5db 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+    border-radius: 4px;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Z-index layering */
 .dashboard-main,
 .modern-navbar,
 .dashboard-footer-minimal {

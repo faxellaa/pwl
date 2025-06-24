@@ -1,0 +1,98 @@
+.status-page-bg {
+  min-height: 100vh;
+  background: linear-gradient(120deg, #eaf1fb 0%, #f4f6fa 100%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 48px;
+}
+
+.status-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(37, 99, 235, 0.10);
+  padding: 40px 32px 32px 32px;
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto 48px auto;
+  animation: fadeIn 0.7s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+.status-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #2563eb;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.status-table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.status-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 18px;
+  font-size: 1rem;
+}
+
+.status-table th, .status-table td {
+  border: none;
+  padding: 10px 8px;
+  text-align: left;
+  vertical-align: top;
+  background: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+.status-table th {
+  background: #2563eb;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  border-bottom: 2px solid #eaf1fb;
+}
+
+.status-table tr {
+  transition: background 0.18s;
+}
+.status-table tr:hover {
+  background: #f4f6fa;
+}
+
+.status-table tbody tr:nth-child(even) {
+  background: #f7fafc;
+}
+.status-table tbody tr:nth-child(odd) {
+  background: #fff;
+}
+
+.back-button-minimal {
+  margin-top: 18px;
+  background: none;
+  color: #2563eb;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.back-button-minimal:hover {
+  color: #1e40af;
+  text-decoration: underline;
+}

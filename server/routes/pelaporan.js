@@ -1,8 +1,20 @@
 // File: routes/pelaporan.js
 import express from "express";
 import Pelaporan from "../models/Pelaporan.js";
+import verifyFirebaseToken from "../middlewares/verifyToken.js";
 
 const router = express.Router();
+
+// 🛡️ Proteksi route POST dengan verifikasi token
+router.post("/", verifyFirebaseToken, async (req, res) => {
+  try {
+    const pelaporan = new Pelaporan(req.body);
+    const saved = await pelaporan.save();
+    res.status(201).json(saved);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
 
 // CREATE pelaporan
 router.post("/", async (req, res) => {

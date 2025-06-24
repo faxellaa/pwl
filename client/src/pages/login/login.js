@@ -17,7 +17,7 @@ class Login extends Component {
         });
     };
 
-    handleLogin = () => {
+    handleLogin = () => { 
         const { email, password } = this.state;
         if (!email || !password) {
             alert('Email dan password wajib diisi');
@@ -26,7 +26,7 @@ class Login extends Component {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 localStorage.setItem('isLogin', 'true');
-                window.location.href = '/';
+                window.location.href = '/admin';
             })
             .catch((error) => {
                 alert('Login gagal: ' + error.message);

@@ -17,6 +17,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from '../../reducers'; // Pastikan file reducers/index.js ada
 import PrivateRoute from '../../components/PrivateRoute'; // pastikan path benar
+import Status from '../status/status';
 
 const store = createStore(rootReducer);
 
@@ -37,6 +38,13 @@ function App() {
                 </PrivateRoute>
               }
             />
+            <Route
+              path="/status"
+              element={
+                <PrivateRoute>
+                  <Status />
+                </PrivateRoute>
+              }/>
             <Route path="/admin" element={<Admin />} />
           </Routes>
         </div>

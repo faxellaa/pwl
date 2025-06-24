@@ -9,6 +9,7 @@ import cors from "cors";
 import pelaporanRoutes from "./routes/pelaporan.js";
 import userRoutes from "./routes/user.js"; // ✅ Tambahkan ini
 import adminRoutes from "./routes/admin.js"; // ✅ Tambahkan route admin
+import adminAuthRoutes from "./routes/adminAuth.js"; // ✅ Tambahkan route adminAuth
 
 // Konfigurasi environment variable
 dotenv.config();
@@ -33,9 +34,11 @@ mongoose
 app.use("/api/pelaporan", pelaporanRoutes); // Route pelaporan
 app.use("/api/user", userRoutes); // ✅ Route user (untuk simpan user Firebase)
 app.use("/api/admin", adminRoutes); // ✅ Route admin untuk mengambil data user Firebase
+app.use("/api/admin-auth", adminAuthRoutes); // ✅ Route adminAuth untuk set role admin
+
 
 // Route dasar
 app.get("/", (req, res) => res.send("SiPelMasD backend berjalan!"));
 
 // Jalankan server
-app.listen(5000, () => console.log("🚀 Server on http://localhost:4000"));
+app.listen(4000, () => console.log("🚀 Server on http://localhost:4000"));

@@ -21,10 +21,34 @@ function Status() {
     <div className="status-page-bg">
       <div className="status-card">
         <h2 className="status-title">Status Laporan Anda</h2>
+
         {loading ? (
-          <div>Memuat data...</div>
+          <div className="status-table-responsive">
+            <table className="status-table">
+              <thead>
+                <tr>
+                  <th>Judul</th>
+                  <th>Jenis</th>
+                  <th>Tanggal Kejadian</th>
+                  <th>Status</th>
+                  <th>Tanggal Input</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[...Array(5)].map((_, index) => (
+                  <tr key={index}>
+                    <td><div className="skeleton skeleton-text short" /></td>
+                    <td><div className="skeleton skeleton-text short" /></td>
+                    <td><div className="skeleton skeleton-text short" /></td>
+                    <td><div className="skeleton skeleton-text short" /></td>
+                    <td><div className="skeleton skeleton-text short" /></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         ) : laporan.length === 0 ? (
-          <div>Tidak ada laporan ditemukan.</div>
+          <div className="status-empty">Tidak ada laporan ditemukan.</div>
         ) : (
           <div className="status-table-responsive">
             <table className="status-table">
@@ -51,6 +75,7 @@ function Status() {
             </table>
           </div>
         )}
+
         <button
           className="back-button-minimal"
           onClick={() => window.location.href = '/'}

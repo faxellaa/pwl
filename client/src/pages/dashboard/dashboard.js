@@ -163,7 +163,7 @@ class Dashboard extends Component {
                                 <h3>Buat Laporan</h3>
                                 <p>Kirim keluhan atau aspirasi Anda dengan mudah dan cepat.</p>
                             </div>
-                            <div className="feature-card-minimal" onClick={() => window.location.href = '/admin'}>
+                            <div className="feature-card-minimal" onClick={() => window.location.href = '/status'}>
                                 <span className="feature-icon-minimal" role="img" aria-label="status">📊</span>
                                 <h3>Cek Status</h3>
                                 <p>Pantau perkembangan laporan Anda secara real-time.</p>

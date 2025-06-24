@@ -3,5 +3,6 @@ node_modules/
 
 server/package-lock.json
 server/node_modules/
+server/firebase-admin-server/web-pelaporan-firebase-adminsdk-fbsvc-1bfc7e0510.json
 client/package-lock.json
 client/node_modules/

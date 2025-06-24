@@ -1,7 +1,10 @@
-// File: laporan.js
+// File: Laporan.jsx
 import React, { useEffect, useState } from "react";
 import DOMPurify from "dompurify";
 import "./laporan.scss";
+
+import { auth } from "../../config/firebase";
+import { getIdToken } from "firebase/auth";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
 
@@ -29,6 +32,22 @@ function Laporan() {
   const [showPreview, setShowPreview] = useState(false);
   const [successId, setSuccessId] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+  const unsub = auth.onAuthStateChanged(async (user) => {
+    if (!user) {
+      window.location.href = '/login';
+    } else {
+      const token = await user.getIdTokenResult();
+      if (token.claims.admin) {
+        alert("Halaman ini hanya untuk masyarakat.");
+        window.location.href = '/admin';
+      }
+    }
+  });
+
+  return () => unsub();
+}, []);
 
   // Ambil data provinsi
   useEffect(() => {
@@ -88,9 +107,15 @@ function Laporan() {
     setSuccessId(null);
 
     try {
+      const user = auth.currentUser;
+      const token = user ? await getIdToken(user) : null;
+
       const response = await fetch(`${API_URL}/api/pelaporan`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({
           ...formData,
           tanggal_kejadian: new Date(formData.tanggal_kejadian),
@@ -137,14 +162,10 @@ function Laporan() {
           Buat Laporan Anda
         </h2>
         <p className="laporan-subtitle">
-          Isi formulir berikut untuk menyampaikan pengaduan atau aspirasi secara
-          online.
+          Isi formulir berikut untuk menyampaikan pengaduan atau aspirasi secara online.
         </p>
-        <form
-          className="form-laporan"
-          onSubmit={handleSubmit}
-          autoComplete="off"
-        >
+
+        <form className="form-laporan" onSubmit={handleSubmit} autoComplete="off">
           <div className="radio-group">
             <label>
               <input
@@ -279,18 +300,14 @@ function Laporan() {
             <option value="perlindungan">Perlindungan</option>
           </select>
 
-          <button
-            type="submit"
-            className="btn-laporan-kirim"
-            disabled={loading}
-          >
+          <button type="submit" className="btn-laporan-kirim" disabled={loading}>
             {loading ? "Mengirim..." : "Kirim Laporan"}
           </button>
 
           <button
             type="button"
             className="btn-laporan-kembali"
-            onClick={() => window.location.href = '/'}
+            onClick={() => window.location.href = "/"}
           >
             ← Kembali ke Dashboard
           </button>
